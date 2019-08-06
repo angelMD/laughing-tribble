@@ -1,52 +1,16 @@
 class RollCall
-  def today
-    @today ||= Date.today.to_s
-  end
-
   def roll
-    @roll ||= {
-      today => {
-        :present => [],
-        :absent => []
-      }
-    }
   end
 
   def student_checkin(name, present)
-    if present
-      roll[today][:present].push(name)
-    else
-      roll[today][:absent].push(name)
-    end
   end
 
   def save_to_file
-    File.open('support/roll_log.md', 'a') do |f|
-      f << formatted_roll
-    end
   end
 
   def roll_percentage(grouping)
-    total_students = roll[today].values.flatten.count
-    present_percent = (roll[today][:present].count.to_f / total_students.to_f) * 100.0
-
-    if grouping == 'present'
-      present_percent
-    elsif grouping == 'absent'
-      100 - present_percent
-    end
   end
 
-  def formatted_roll
-    <<~ROLLDOC
-      ## Roll call for #{today}
-      ### #{roll_percentage('present')}% Present
-      #{roll[today][:present].join(', ')}
-      ### #{roll_percentage('absent')}% Absent
-      #{roll[today][:absent].join(', ')}
-      #{'-' * 42}
-    ROLLDOC
-  end
 end
 
 describe RollCall do

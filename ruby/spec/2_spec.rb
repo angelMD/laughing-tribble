@@ -1,7 +1,4 @@
 def palindrome?(str)
-  reversed_str = str.split('').reverse.join
-
-  reversed_str.downcase == str.downcase
 end
 
 describe 'palindrome?' do
