@@ -1,28 +1,18 @@
-function flatten(arr) {
-  const ret = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] instanceof Array) {
-      ret.push.apply(ret, flatten(arr[i]));
-    } else {
-      ret.push(arr[i]);
-    }
-  }
-  return ret;
+function arrayConverter(...arr) {
+  const ret = arr.reduce((previous, current) => (
+    current.each(i => (
+      previous.push()
+    ))
+  ), []);
+  console.log(ret);
 }
 
-
-describe('flatten', () => {
-  const arr = [1, [2], [3, 4, [5]]];
-
-  it('will return another array', () => {
-    expect(flatten(arr)).not.toBe(arr);
-  });
-
-  it('will flatten an simple array', () => {
-    expect(flatten([1, 2, 3, 4, [5]])).toEqual([1, 2, 3, 4, 5]);
-  });
-
-  it('will flatten an array', () => {
-    expect(flatten(arr)).toEqual([1, 2, 3, 4, 5]);
+describe('Combine arrays and convert strings to integers', () => {
+  it('can take in a variable number of arrays and return a single array', () => {
+    const arr1 = ['1', '5', '9'];
+    const arr2 = ['10', '2', '7', '10'];
+    const arr3 = ['3', '4', '0'];
+    expect(arrayConverter(arr1, arr2, arr3).length).toEqual(10);
+    expect(arrayConverter(arr1)[0]).toEqual(1);
   });
 });
