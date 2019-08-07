@@ -1,49 +1,13 @@
-import { readFile, writeFileSync } from 'fs';
+import { readFile } from 'fs';
 
 class RollCall {
-  constructor() {
-    this.roll = {
-      [this.today()]: {
-        present: [],
-        absent: [],
-      },
-    };
-  }
+  getRoll() {}
 
-  today = () => new Date().toISOString().slice(0, 10);
+  studentCheckin() {}
 
-  getRoll = () => this.roll;
+  saveToFile() {}
 
-  studentCheckin = (name, present) => {
-    if (present) {
-      this.roll[this.today()].present.push(name);
-    } else {
-      this.roll[this.today()].absent.push(name);
-    }
-  };
-
-  saveToFile = () => writeFileSync('support/roll_log.md', this.formattedRoll());
-
-  rollPercentage = (grouping) => {
-    const totalStudents = this.roll[this.today()].present.length
-      + this.roll[this.today()].absent.length;
-    const presentPercent = (this.roll[this.today()].present.length / totalStudents) * 100.0;
-
-    if (grouping === 'present') {
-      return presentPercent;
-    }
-
-    return 100 - presentPercent;
-  };
-
-  formattedRoll = () => (
-    `## Roll call for ${this.today()}
-### ${this.rollPercentage('present')}% Present
-${this.roll[this.today()].present.join(', ')}
-### ${this.rollPercentage('absent')}% Absent
-${this.roll[this.today()].absent.join(', ')}
-#{'-' * 42}`
-  );
+  rollPercentage() {}
 }
 
 function instance() {

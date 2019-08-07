@@ -1,6 +1,4 @@
 function isPalindrome(str) {
-  const reversedStr = str.split('').reverse().join('');
-  return reversedStr.toUpperCase() === str.toUpperCase();
 }
 
 describe('palindrome', () => {

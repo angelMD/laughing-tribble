@@ -1,11 +1,4 @@
 function arrayConverter(...arr) {
-  const ret = arr.reduce((previous, current) => {
-    current.forEach(i => (
-      previous.push(parseInt(i, 10))
-    ));
-    return previous;
-  }, []);
-  return ret;
 }
 
 describe('Combine arrays and convert strings to integers', () => {
